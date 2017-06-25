@@ -5,6 +5,7 @@
  */
 package persona;
 
+import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -35,10 +36,14 @@ public class MiCalendar extends GregorianCalendar {
         }
     }
 
-    public MiCalendar(Calendar calendar) throws FechaInvalidaException, NullPointerException {
+    public MiCalendar(Calendar calendar) throws FechaInvalidaException {
         setDía(calendar.get(DAY_OF_MONTH));
         setMes(calendar.get(MONTH) + 1);
         setAño(calendar.get(YEAR));
+    }
+
+    public MiCalendar(Date date) {
+        setTimeInMillis(date.getTime());
     }
 
     void setDía(int día) throws FechaInvalidaException {
@@ -88,4 +93,7 @@ public class MiCalendar extends GregorianCalendar {
         return String.format("%02d", getDía()) + "/" + String.format("%02d", getMes()) + "/" + getAño();
     }
 
+    public Date toDate() {
+        return new Date(getTimeInMillis());
+    }
 }
